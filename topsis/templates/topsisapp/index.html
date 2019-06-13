@@ -9,7 +9,11 @@
 	<div class="container-fluid">
 		<div class="jumbotron">
 		<h1>Welcome to topsis Analyser</h1>
+		{% if result %}
+		   <h2>THE Topsis analysis Result is :</h2>
 		
+		{% else %}
+		    
 		<form method="post" enctype="multipart/form-data" >
 			{% csrf_token %}
 			<h2>Select your file and enter the evaluation parameters</h2>	
@@ -31,7 +35,7 @@
 			
 		
 		</form>	
-				
+			{% endif %}	
 	</div>
 </body>
 </html>
