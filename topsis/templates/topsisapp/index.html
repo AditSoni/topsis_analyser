@@ -1,41 +1,40 @@
 <!DOCTYPE html>
+{% load staticfiles%}
 <html>
 <head>
 	<title>Topsis Analyser</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet"  href="{% static "css/mystyle.css " %}">
 
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="jumbotron">
-		<h1>Welcome to topsis Analyser</h1>
-		{% if result %}
-		   <h2>THE Topsis analysis Result is :</h2>
-		
-		{% else %}
-		    
-		<form method="post" enctype="multipart/form-data" >
+		<h1>Welcome to Topsis Analyser</h1>
+    	{% if file %}
+    	    
+    		<p><small><a href="/setpara/"><h2>Set parameters now!</h2></a></small></p>
+    	{% else %}
+    	    
+		<form method="POST" enctype="multipart/form-data">
 			{% csrf_token %}
-			<h2>Select your file and enter the evaluation parameters</h2>	
+			<h2>Select your file and Click on process</h2>	
 			<input type="file" name="data" required accept=".csv" >
 			<p>Make sure your file is *.csv format</p>
 		     <a href="https://drive.google.com/open?id=1Tt1YKLzIJQUehlNHk9Jlv5j8mU-i1fWY" target="blank" download>
 				click here to download sample data file
 			</a>
 			<br>
-			<label><big>Enter the parameters</big></label>
-			<small>(the parameters must be entered as provided in the csv file)</small>
-			<br>
-			
-			<label>Max/Min</label><input type="text" name="m" required placeholder="+,+,+,+,+" id="m">
-			<br>
-			<label>Weights</label><input type="text" name="w" required placeholder="1,1,1,1,1" id="w">
-			<br>
-			<button type="submit">GO!</button>
+			<button type="submit" onclick="myFunction()">Process!</button>
 			
 		
 		</form>	
-			{% endif %}	
+	{% endif %}
 	</div>
+	<script>
+	function myFunction() {
+  	window.location.href = "/setpara/";
+}
+</script>
 </body>
 </html>

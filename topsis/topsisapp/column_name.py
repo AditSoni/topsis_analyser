@@ -1,8 +1,22 @@
-import pandas as p
 
-def get_columns(file):
-	file=p.read_csv(file)
-	file=file.drop([file.columns[0]],axis=1) # renoving first column
-	column=list(file.columns)
-	
-	return column
+
+def get_columns(file,n=1):
+	fp=open(file)
+	name=[]
+	if n==1:
+		x=0
+		for line in fp:
+			if x==0:
+				x=1
+				continue
+			l=line.split(',')
+			name.append(l[0])
+	else:
+		for line in fp:
+			l=line.strip()
+			l=l.split(',')
+			name=l[1:]
+			name
+			break
+
+	return name
