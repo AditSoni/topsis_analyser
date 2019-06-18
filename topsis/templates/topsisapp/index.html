@@ -8,12 +8,53 @@
 
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container">
 		<div class="jumbotron">
 		<h1>Welcome to Topsis Analyser</h1>
-    	{% if file %}
+    	{% if upload %}
+
     	    
-    		<p><small><a href="/setpara/"><h2>Set parameters now!</h2></a></small></p>
+    		<form method="POST">	
+				{% csrf_token %}
+			<h2>Set the parameters </h2>
+			<h3>What do these parameters mean ?</h3>
+			<p><small>The max/min parameter asks you if a property with more value(max) is beneficial <br>
+			or is beneficial with less value(min)</p></small>
+			<br>
+			<p><small>The weight parameter just tells us about weightage or importance given to a property<br>
+			If you don't know ,just assign all the weights with 1 <br>
+			Weight varies from 0 to 1 </p></small>
+		<table style="width:50%">
+		<thead>
+
+			<th>Parameter   </th>
+			<th> MAX/MIN    </th>
+			<th>Weight(0~1) </th>
+		</thead>
+
+		
+		    {% for n,name in column %}
+		    
+			<tr>
+			<td>{{ name }} </td>
+			<td><input type="radio" name="m{{n}}" value="1" required> Maximize
+ 				 <input type="radio" name="m{{n}}" value="0"> Minimize<br></td>
+
+			<td><input type="text" name="w{{n}}" required></td>
+			</tr>
+
+			{% endfor %}
+		</table>
+			<br>
+			<br>
+			<label>Email </label><input type="email" name="email" required>
+			<br>
+			<br>
+			
+			<button type="submit" onclick="myFunction()">GO</button>
+			</form>
+		 
+		
     	{% else %}
     	    
 		<form method="POST" enctype="multipart/form-data">
@@ -21,20 +62,32 @@
 			<h2>Select your file and Click on process</h2>	
 			<input type="file" name="data" required accept=".csv" >
 			<p>Make sure your file is *.csv format</p>
-		     <a href="https://drive.google.com/open?id=1Tt1YKLzIJQUehlNHk9Jlv5j8mU-i1fWY" target="blank" download>
-				click here to download sample data file
+		     <a href="{{sample}}" target="blank" download>
+				Download sample data file
 			</a>
 			<br>
-			<button type="submit" onclick="myFunction()">Process!</button>
+			<button type="submit" value="done">Go!</button>
 			
 		
 		</form>	
 	{% endif %}
+
+
+
 	</div>
-	<script>
-	function myFunction() {
-  	window.location.href = "/setpara/";
+
+
+
+
+
+
+
+<script>
+function myFunction() {
+  alert("Email has Been Sent!!")
 }
-</script>
+</script>  
+
+
 </body>
 </html>

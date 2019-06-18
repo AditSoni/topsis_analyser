@@ -38,7 +38,7 @@ class topsis:
         self.j=np.array(j)
         
 
-    #Step 2 naormalization
+    #Step 2 normalization
     def step2(self):
         self.r=self.a
         for i in range(self.m):
@@ -54,7 +54,7 @@ class topsis:
         self.aw=[]
         self.ab=[]
         for i in range(self.n):
-            if self.j[i]==0:
+            if self.j[i]==1:
                 self.aw.append(min(self.t[:,i]))
                 self.ab.append(max(self.t[:,i]))
             else:
@@ -69,7 +69,7 @@ class topsis:
         """for j in range(self.n):
             self.diw[:,j]=(self.diw[:,j]-self.aw[j])**2
             self.dib[:,j]=(self.dib[:,j]-self.ab[j])**2
-        print(self.diw"""
+        print(self.diw)"""
         self.dw=[]
         self.db=[]
         for j in range(self.m):
@@ -107,7 +107,7 @@ class topsis:
 def topsys(file,w,j):
 
     fr=open(file)
-    fw=open(settings.MEDIA_ROOT+'/'+'dat1.csv','w')
+    fw=open(settings.MEDIA_ROOT+'/uploads/'+'dat1.csv','w')
 
     for line in fr:
         l=line.split(',')
@@ -117,7 +117,7 @@ def topsys(file,w,j):
     fr.close()
     fw.close()
 
-    a=np.loadtxt(open(settings.MEDIA_ROOT+'/'+'dat1.csv', "rb"), delimiter=",", skiprows=1)
+    a=np.loadtxt(open(settings.MEDIA_ROOT+'/uploads/'+'dat1.csv', "rb"), delimiter=",", skiprows=1)
 
     t=topsis(a,w,j)
 

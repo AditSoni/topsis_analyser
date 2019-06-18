@@ -33,7 +33,7 @@ def mail(mail):
 	  
 	# open the file to be sent  
 	filename = "TopsisResult.csv"
-	attachment = open(settings.MEDIA_ROOT+'/'+'TopsisResult.csv', "rb") 
+	attachment = open(settings.MEDIA_ROOT+'/results/'+'TopsisResult.csv', "rb") 
 	  
 	# instance of MIMEBase and named as p 
 	p = MIMEBase('application', 'octet-stream') 
@@ -56,7 +56,7 @@ def mail(mail):
 	s.starttls() 
 	  
 	# Authentication 
-	s.login("your email", "your password") 
+	s.login("yourmail", "password") 
 	  
 	# Converts the Multipart msg into a string 
 	text = msg.as_string() 
