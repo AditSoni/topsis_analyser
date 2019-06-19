@@ -1,24 +1,20 @@
 <!DOCTYPE html>
+{% load staticfiles%}
 <html>
 <head>
 	<title>Topsis Analyser</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet"  href="{% static "css/mystyle.css " %}">
 
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container">
 		<div class="jumbotron">
 		<h1>Welcome to Topsis Analyser</h1>
+    	{% if upload %}
 
-
-		{% if score  %}
-		    
-		<h2>Email has been sent!!</h2>
-	 	<p>Make sure to check your spam folder too!</p>
-		    <a href="/">Return to homepage</a>
-			
-		{% elif column %}
-			<form method="POST">	
+    	    
+    		<form method="POST">	
 				{% csrf_token %}
 			<h2>Set the parameters </h2>
 			<h3>What do these parameters mean ?</h3>
@@ -53,18 +49,45 @@
 			<br>
 			<label>Email </label><input type="email" name="email" required>
 			<br>
+			<br>
 			
-			<button type="submit" >GO</button>
+			<button type="submit" onclick="myFunction()">GO</button>
 			</form>
-		 {% else %}
-		     
-		   <h2>ERROR READING FILE...</h2>  
+		 
 		
-		{%endif%}
+    	{% else %}
+    	    
+		<form method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			<h2>Select your file and Click on process</h2>	
+			<input type="file" name="data" required accept=".csv" >
+			<p>Make sure your file is *.csv format</p>
+		     <a href="{{sample}}" target="blank" download>
+				Download sample data file
+			</a>
+			<br>
+			<button type="submit" value="done">Go!</button>
+			
 		
+		</form>	
+	{% endif %}
+
+
+
 	</div>
-		<center><footer style="size: a3;">If you are having trouble submitting ,Try<br>
-		i.Reloading the page<br>
-		ii.Turning on incognito mode and visit this page again</footer> </center>
+
+
+
+
+
+
+
+<script>
+function myFunction() {
+  alert("Email has Been Sent!!")
+}
+</script>  
+
+
 </body>
 </html>
